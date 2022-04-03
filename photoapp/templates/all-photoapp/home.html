@@ -1,0 +1,60 @@
+{%extends 'base.html'%} {%load bootstrap3%} {%load static%} {%block content%} {{block.super}}
+
+<div class="container">
+    <div>
+        <div class="row">
+            <div class="col-sm-12 col-md-8 col-lg-8">
+                {%for post in post%}
+                <div class="post">
+                    <h1>
+                        <div class="d-flex" style="padding-right:35px;">
+                            <img src="./../../static/icons/Avatar.png" alt="Avatar" width="35" height="35"> {{post.editor.first_name}}
+                            <h4 class="current">{{current_user}}</h4>
+
+                        </div>
+
+                    </h1>
+                    <a href="{%url 'details' post.id%}"><img src="{{post.image.url}}" alt="Card image cap" class="img-responsive image"></a>
+
+                    <span class="like-row">
+                        <img class="like" src="{% static 'icons/heart.png' %}" alt="not likedpicture" width="30px"
+                            class="img-responsive" type="">
+                        <img class="commenthrt" id='comment-icon' src="../../static/icons/icons8-speech-bubble-50.png"
+                            width="30px" class="img-responsive" alt=" commentImage">
+                        </p>
+                    </span>
+
+                    <div class="icons">
+                        <h3>{{post.title}}</h3>
+                        <p>{{post.post}}</p>
+                        <i>Posted {{post.pub_date|timesince}} ago.</i>
+
+                        <div class="container-fluid">
+                            <a href="{%url 'comment' post.id %}" class="pl-3">
+                                <p>{{post.comment.Count}}</p>
+                                View all comments
+                            </a>
+                        </div>
+                    </div><br>
+                </div>
+                {%endfor%}
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <div class="d-flex" style="display:flex"><img src="./../../static/icons/Avatar.png" alt="Avatar" width="26" height="26">
+                </div>
+                <p>{{current_user}}</p>
+                <h3>My posts</h3>
+                {%for post in post%}
+                <h4 class="current">{{post.user.username}}</h4>
+                <p>
+                    <ul>
+                        <li>{{post.title}} posted on {{post.pub_date}}</li>
+                    </ul>
+                </p>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endblock%}
