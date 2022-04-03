@@ -1,0 +1,49 @@
+{% extends "all-photos/base.html" %} {% load bootstrap3 %} {% block content %} {{block.super}}
+<section class="profile container">
+    <div class=" mt-3">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    {% if profile.profile_pic %}
+                    <img src="{{profile.profile_pic.url}}" alt="" class="card-img-top profile" width="200" height="150"> {%else%}
+                    <img src="img_avatar.png" alt="Avatar" style="width:200px" class="card-img-top img-responsive" alt="Profile picture"> {% endif %}
+                    <div class="card-body text-center">
+                        <p><em>Username: </em>{{ user.username }}</p>
+                        <p>
+                            {% if profile.bio %}
+                            <small><em>Bio: </em>{{ profile.bio }}</small> {% else %}
+                            <span class="text-danger">No about me</span> {% endif %}
+                        </p>
+                        <h6>Joined on: {{ user.date_joined|date }}</h6>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <form action="" method="post" enctype="multipart/form-data" class="m-4">
+                    {% csrf_token%} {% bootstrap_form form %}
+                    <button type="submit" class="btn btn-info btn-sm login"> Update Profile</button>
+                </form>
+
+            </div>
+        </div>
+        <h3 class="text-center">My posts</h3>
+        {% for image in image %}
+        <div class="col-md-4">
+
+            <div class="card mb-4">
+                <img src="{{ image.image.url }}" class="img-responsive" alt="Image">
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="alert alert-info" role="alert">
+                No images!
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
