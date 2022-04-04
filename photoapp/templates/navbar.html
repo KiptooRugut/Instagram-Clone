@@ -1,3 +1,4 @@
+{%load bootstrap3%}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,13 +35,13 @@
                 {% if user.is_authenticated %}
                 <ul>
                     <li class="dropdown">
-                        <p href="#" <i class="fa fa-fw fa-user dropdown-toggle account " data-toggle="dropdown" role="button" aria-expanded="false">
+                        <a href="#" <i class="fa fa-fw fa-user dropdown-toggle account" data-toggle="dropdown" role="button" aria-expanded="false">
                             </i>
-                        </p>
+                        </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{%url 'index'%}">Home</a></li>
+                            <li><a href="{%url 'home'%}">Home</a></li>
                             <li><a href="{%url 'profile'%}">{{user}}</a></li>
-                            <li><a href="{%url 'newImage' %}">Post</a></li>
+                            <li><a href="{%url 'newpost' %}">Post</a></li>
                             <li><a href="/accounts/password/change">Change Password</a></li>
                             <li><a href="/logout">Logout</a></li>
                         </ul>
